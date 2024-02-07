@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "135083071812",
+    "project_id": "wahu-signup",
+    "storage_bucket": "wahu-signup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135083071812:android:9d76037e214e382ead5f11",
+        "android_client_info": {
+          "package_name": "com.appiah.wahu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135083071812-m04j2qvb2itjgcscjih33pt4m2f2vn2p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appiah.wahu",
+            "certificate_hash": "09f39c96fb25c9c92e6eeec60fe70ebcfe6db76b"
+          }
+        },
+        {
+          "client_id": "135083071812-b3mrghk0ns991gsclbk1euud3ba8mb1u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwVlR0SaMHX6-XXmm_VH6SamAewpGZS94"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135083071812-b3mrghk0ns991gsclbk1euud3ba8mb1u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
