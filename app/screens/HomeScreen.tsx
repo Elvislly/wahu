@@ -11,7 +11,7 @@ import Spacing from '../../constants/Spacing';
 import FontSize from '../../constants/FontSize';
 import Font from '../../constants/Font';
 import { MaterialIcons } from '@expo/vector-icons';
-import { WebFirebase } from '../../config/firebaseConfig';
+import { WebAuth } from '../../config/firebaseConfig';
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 export type UserData = {
@@ -55,7 +55,7 @@ const HomeScreen: React.FC<Props> = () => {
       };
     
       useEffect(() => {
-        const subscriber = WebFirebase.auth().onAuthStateChanged(OnFBAuthStateChanged)
+        const subscriber = WebAuth.onAuthStateChanged(OnFBAuthStateChanged)
         return subscriber; 
       }, [])
      const onAuthStateChanged = (user: FirebaseAuthTypes.User | null) => {
@@ -75,7 +75,7 @@ const HomeScreen: React.FC<Props> = () => {
     //Signout
     const signOutFB = async() => {
         try {
-          await WebFirebase.auth().signOut()
+          await WebAuth.signOut()
         } catch (error) {
           console.log(error);     
         }

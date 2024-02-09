@@ -12,7 +12,7 @@ import ToastAlert from '../components/ToastAlert';
 import Font from '../../constants/Font';
 import AppTextInput from '../components/AppTextInput';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { WebFirebase } from '../../config/firebaseConfig';
+import { WebAuth } from '../../config/firebaseConfig';
   
 type Props = NativeStackScreenProps<RootStackParamList, "Details">;
 
@@ -23,7 +23,7 @@ const DetailsScreen: React.FC<Props> = ({ navigation: { navigate }, route }) => 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [openToast, setOpenToast] = useState(false);
-  const { uuid, phoneNumber, firstName: first, lastName: last, email: mail, photoURL } = route.params ?? {};
+  const { uuid,firstName: first, lastName: last, email: mail, photoURL } = route.params ?? {};
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -47,7 +47,7 @@ const DetailsScreen: React.FC<Props> = ({ navigation: { navigate }, route }) => 
 
   useEffect(() => {
     const phoneSubscriber = auth().onAuthStateChanged(onDefaultAuthStateChanged);
-    const facebookSubscriber = WebFirebase.auth().onAuthStateChanged(onFacebookAuthStateChanged);
+    const facebookSubscriber = WebAuth.onAuthStateChanged(onFacebookAuthStateChanged);
     return () => {
       phoneSubscriber();
       facebookSubscriber();

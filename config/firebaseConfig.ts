@@ -1,23 +1,3 @@
-// import firebase from 'firebase/compat/app'
-// import 'firebase/compat/auth'
-// import 'firebase/compat/firestore'
-
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBU3pzoCC-aybjR6Hvwi3V_-eNpYahplWg",
-//   authDomain: "wahu-auth.firebaseapp.com",
-//   projectId: "wahu-auth",
-//   storageBucket: "wahu-auth.appspot.com",
-//   messagingSenderId: "49078308569",
-//   appId: "1:49078308569:web:5b4a0a3ac3e07e74c6f8c8",
-//   measurementId: "G-6NF590Q643"
-// }
-
-// if (!firebase.apps.length) {
-//     firebase.initializeApp(firebaseConfig)
-// }
-
-// export  const WebFirebase = firebase
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
@@ -49,4 +29,3 @@ const auth = initializeAuth(app, {
 });
 
 export const WebAuth = auth;
-export const WebFirebase = firebase;

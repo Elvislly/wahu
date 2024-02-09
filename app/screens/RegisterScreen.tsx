@@ -22,8 +22,8 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import ToastAlert from "../components/ToastAlert";
 import AppNumberInput from "../components/AppNumberInput";
-import { WebFirebase } from "../../config/firebaseConfig";
-import { FacebookAuthProvider, getAuth, signInWithCredential } from "firebase/auth"
+import { WebAuth } from "../../config/firebaseConfig";
+import { FacebookAuthProvider, signInWithCredential } from "firebase/auth"
 import { LoginManager, AccessToken   } from 'react-native-fbsdk-next'
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 type Props = NativeStackScreenProps<RootStackParamList, "Register">;
@@ -55,11 +55,10 @@ const signInWithFB = async() => {
     }
 
   // Create a Firebase credential with the AccessToken
-  const auth = getAuth()
   const facebookCredential = FacebookAuthProvider.credential(data.accessToken);
 
   // Sign-in the user with the credential
-  await signInWithCredential(auth, facebookCredential)
+  await signInWithCredential(WebAuth, facebookCredential)
   .then(async(data) => {
     const useDocument = await firestore()
     .collection("users")
@@ -135,7 +134,7 @@ const onDefaultAuthStateChanged = async (user: FirebaseAuthTypes.User | null) =>
 
 useEffect(() => {
   const phoneSubscriber = auth().onAuthStateChanged(onDefaultAuthStateChanged);
-  const facebookSubscriber = WebFirebase.auth().onAuthStateChanged(onFacebookAuthStateChanged);
+  const facebookSubscriber = WebAuth.onAuthStateChanged(onFacebookAuthStateChanged);
   return () => {
     phoneSubscriber();
     facebookSubscriber();
