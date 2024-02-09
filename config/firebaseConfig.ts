@@ -19,7 +19,9 @@
 // export  const WebFirebase = firebase
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
+import { initializeApp } from "firebase/app";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
@@ -33,36 +35,18 @@ const firebaseConfig = {
   measurementId: "G-0S7TBVY4N9"
 }
 
-type FirebaseConfig = typeof firebaseConfig;
 
-const saveData = async (key: string, value: FirebaseConfig) => {
-  try {
-    await AsyncStorage.setItem(key, JSON.stringify(value));
-  } catch (error) {
-    console.error('Error saving data:', error);
-  }
-};
+// / Check if Firebase app is already initialized
+if (!firebase.apps.length) {
+  // Initialize Firebase app
+  firebase.initializeApp(firebaseConfig);
+}
 
-const getData = async (key: string): Promise<FirebaseConfig | null> => {
-  try {
-    const jsonValue = await AsyncStorage.getItem(key);
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch (error) {
-    console.error('Error getting data:', error);
-    return null;
-  }
-};
+// Initialize Firebase authentication
+const app = initializeApp(firebaseConfig);
+const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage)
+});
 
-const initializeApp = async () => {
-  const storedFirebaseConfig = await getData('firebaseConfig');
-  if (storedFirebaseConfig) {
-    firebase.initializeApp(storedFirebaseConfig);
-  } else {
-    firebase.initializeApp(firebaseConfig);
-    saveData('firebaseConfig', firebaseConfig);
-  }
-};
-
-initializeApp();
-
+export const WebAuth = auth;
 export const WebFirebase = firebase;

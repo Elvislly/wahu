@@ -26,7 +26,7 @@ import { formattedNumber } from "./RegisterScreen";
 import firebase from '@react-native-firebase/app';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 import { FacebookAuthProvider, getAuth, signInWithCredential } from "firebase/auth"
-import { WebFirebase } from "../../config/firebaseConfig";
+import { WebAuth, WebFirebase } from "../../config/firebaseConfig";
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
@@ -47,6 +47,7 @@ const signInWithFB = async() => {
     const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
 
     if (result.isCancelled) {
+      setLoading(false)
       return
     }
   
@@ -61,7 +62,7 @@ const signInWithFB = async() => {
   const facebookCredential = FacebookAuthProvider.credential(data.accessToken);
 
   // Sign-in the user with the credential
-  await signInWithCredential(auth, facebookCredential)
+  await signInWithCredential(WebAuth, facebookCredential)
   .then(async(data) => {
     const useDocument = await firestore()
     .collection("users")
@@ -179,6 +180,7 @@ const confirmCode = async() => {
 
 GoogleSignin.configure({
   webClientId: '135083071812-b3mrghk0ns991gsclbk1euud3ba8mb1u.apps.googleusercontent.com',
+  iosClientId: '135083071812-7mh78go0jkoa40l7bp2o8dc1l1jv9ss1.apps.googleusercontent.com'
 });
 
 const signInwithGoogle = async() => {

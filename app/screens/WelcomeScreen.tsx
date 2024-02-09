@@ -16,13 +16,42 @@ import Spacing from "../../constants/Spacing";
 import FontSize from "../../constants/FontSize";
 import Colors from "../../constants/Colors";
 import Font from "../../constants/Font";
+import { WebFirebase } from "../../config/firebaseConfig";
+import { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import auth from '@react-native-firebase/auth';
 
 const { height } = Dimensions.get("window");
 
 type Props = NativeStackScreenProps<RootStackParamList, "Welcome">;
 
 const WelcomeScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
+  // Set an initializing state whilst Firebase connects
+  const [initializing, setInitializing] = useState(true);
+  const onFacebookAuthStateChanged = (user: FirebaseAuthTypes.User | null | any | Error) => {
+    if (initializing) setInitializing(false);
+    if (user) {
+      navigate("Home")
+    }
+  };
   
+  // Handle Phone number authentication state changes
+  const onDefaultAuthStateChanged = async (user: FirebaseAuthTypes.User | null) => {
+    if (initializing) setInitializing(false);
+    if(user) {
+      navigate("Home")
+    }
+  };
+  
+  useEffect(() => {
+    const phoneSubscriber = auth().onAuthStateChanged(onDefaultAuthStateChanged);
+    const facebookSubscriber = WebFirebase.auth().onAuthStateChanged(onFacebookAuthStateChanged);
+    return () => {
+      phoneSubscriber();
+      facebookSubscriber();
+    };
+  }, []);
+  
+  if (initializing) return null;
   return (
     <SafeAreaView>
       <KeyboardAvoidingView>

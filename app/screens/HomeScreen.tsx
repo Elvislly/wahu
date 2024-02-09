@@ -83,6 +83,7 @@ const HomeScreen: React.FC<Props> = () => {
     const signOut = async() => {
         try {
           if(user) {
+            await auth().revokeToken
             await auth().signOut();            
           } else {
             signOutFB()

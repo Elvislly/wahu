@@ -44,16 +44,14 @@ const signInWithFB = async() => {
     const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
 
     if (result.isCancelled) {
+      setLoading(false)
       return
-        throw 'User cancelled the login process';
     }
   
     // Once signed in, get the users AccessToken
     const data = await AccessToken.getCurrentAccessToken();
-  
     if (!data) {
       return
-      throw 'Something went wrong obtaining access token';
     }
 
   // Create a Firebase credential with the AccessToken
@@ -145,7 +143,7 @@ useEffect(() => {
 }, []);
 
 const confirmCode = async() => {
-  if (code == "") {
+  if ( code == "") {
     setMessage("Enter SMS verification code")
     setOpenToast(true)
     return

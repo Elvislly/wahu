@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>135083071812-7mh78go0jkoa40l7bp2o8dc1l1jv9ss1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.135083071812-7mh78go0jkoa40l7bp2o8dc1l1jv9ss1</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>135083071812-m04j2qvb2itjgcscjih33pt4m2f2vn2p.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCepzVlO8B9AQ8qZ_zXQeWKLvb7HihiRrs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>135083071812</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.appiah.wahu</string>
+	<key>PROJECT_ID</key>
+	<string>wahu-signup</string>
+	<key>STORAGE_BUCKET</key>
+	<string>wahu-signup.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:135083071812:ios:89d331b437f65228ad5f11</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+	<dict>
+	<key>CFBundleURLSchemes</key>
+	<array>
+		<string>919431449399910</string>
+	</array>
+	</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>919431449399910</string>
+	<key>FacebookClientToken</key>
+	<string>826f81aed52aa9c43a6f725295898d91</string>
+	<key>FacebookDisplayName</key>
+	<string>wahu</string>
+</dict>
+</plist>
