@@ -1,4 +1,5 @@
 import {
+  ActivityIndicator,
   Dimensions,
   ImageBackground,
   KeyboardAvoidingView,
@@ -8,8 +9,6 @@ import {
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-
-import { Ionicons } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../types";
 import Spacing from "../../constants/Spacing";
@@ -27,8 +26,11 @@ type Props = NativeStackScreenProps<RootStackParamList, "Welcome">;
 const WelcomeScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
+  const [loading, setLoading] = useState(true); // New state for loading indicator
+
   const onFacebookAuthStateChanged = (user: FirebaseAuthTypes.User | null | any | Error) => {    
     if (initializing) setInitializing(false);
+    setLoading(false); // Hide loading indicator
     if (user) {
       navigate("Home")
     }
@@ -49,12 +51,16 @@ const WelcomeScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
       phoneSubscriber();
       facebookSubscriber();
     };
-  }, [initializing]);
+  }, []);
   
-  if (initializing) return null;
   return (
-    <SafeAreaView>
-      <KeyboardAvoidingView>
+    <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
+     {loading || initializing ? 
+      <View >
+        <ActivityIndicator size={50}/>
+      </View> 
+      : 
+      <View>
       <ImageBackground
           style={{
             height: height / 2,
@@ -138,7 +144,8 @@ const WelcomeScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
             </Text>
           </TouchableOpacity>
         </View>
-      </KeyboardAvoidingView>
+      </View>
+      }
     </SafeAreaView>
   );
 };
